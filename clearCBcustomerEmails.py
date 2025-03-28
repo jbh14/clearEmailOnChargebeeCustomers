@@ -2,7 +2,10 @@ import os
 import requests
 import base64
 from dotenv import load_dotenv
-from readCustomerIDs import read_customer_ids
+from clearEmailOnChargebeeCustomers.readCustomerIDs import read_customer_ids
+
+CUSTOMERS_CSV_FILE = "customers.csv"
+CUSTOMER_ID_COL_HEADER = "customer_id"
 
 # Load environment variables from .env file
 load_dotenv()
@@ -23,7 +26,7 @@ HEADERS = {
 }
 
 # Load customer IDs from CSV
-customer_ids = read_customer_ids("customers.csv", "customer_id") # 1st parameter is the CSV filename, 2nd parameter is the column header for customer IDs
+customer_ids = read_customer_ids(CUSTOMERS_CSV_FILE, CUSTOMER_ID_COL_HEADER) # 1st parameter is the CSV filename, 2nd parameter is the column header for customer IDs
 
 def update_customer(customer_id):
     url = f"{BASE_URL}{customer_id}"
